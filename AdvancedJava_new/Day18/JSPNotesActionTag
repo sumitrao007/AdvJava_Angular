@@ -1,0 +1,27 @@
+JSP actions Tags:
+ - To minimize/eliminate Java code from JSP, it is recommended to use various "tags" instead of java code (scriptlet/expressions).
+	- JSP actions -- <jsp:____ ... />
+ - <jsp:forward page="..." /> 
+		--->It same as work like Request Dispatcher rd.forward(req, resp); 
+ - <jsp:include page="..." /> 
+		--->It same as work like Request Dispatcher rd.include(req, resp);
+	  -	Like include page directive this action is also used to insert a JSP file in another file
+ - <jsp:useBean .../>
+	* With the help of use bean we eliminate java code such as to request.getparameter("username")
+	 
+	 * <jsp:useBean id="name" class="pkg.BeanClass" scope="?"/>
+		- scope: page | request | session | application
+		- page --> bean is stored as pageContext attribute.
+			bean is accessible only on that page only for that request.
+			this is default scope.
+		- request --> bean is stored as request attribute.		
+			bean is accessible on all pages to which req is fwded or incled.
+		- session --> bean is stored as session attribute.		
+			bean is accessible in all reqs to all pages accessed by same user
+		- application --> bean is stored as servletContext attribute.
+			bean is accessible in all reqs to all pages accessed by all users
+		
+	
+	* <jsp:setProperty .../>
+	* <jsp:getProperty .../> 
+	 - jsp:getProperty or jsp:setProperty on a JSP page followed by jsp:useBean.
