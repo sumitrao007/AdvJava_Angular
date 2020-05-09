@@ -1,0 +1,32 @@
+JSTL Tag Library (JSP Standard Tag library)
+	- It is collection of predefined tags to simply the jsp development
+	- Advantages
+		1 Fast Development JSTL provides many tags that simplify the JSP.
+		2 Code Reusability We can use the JSTL tags on various pages.
+		3 No need to use scriptlet tag It avoids the use of scriptlet tag.
+	
+	- Core Tag
+		1 The JSTL core tag provide variable support, URL management, flow control, etc. The URL for the core tag is http://java.sun.com/jsp/jstl/core. The prefix of core tag is c.
+		
+		2 control struct: if, switch, loop, ...
+		  manipulating variables
+		  http related: redirect, url, ...
+	
+	- SQL Tag
+		1 The JSTL SQL tags provide SQL support. The URL for the SQL tags is http://java.sun.com/jsp/jstl/sql and prefix is sql.
+		2 invoke SQL queries from JSP pages -- encapsulate JDBC code
+		3 not recommended -- no separation in view and backend layer
+	- xml --> xml
+		1 xml processing -- parsing, making, ...
+	- fn --> functions
+		1 simple string functions/String manipulation	
+
+How to JSTL Steps as follow
+- Using JSTL:
+		step1: add jstl jar in classpath -- WEB-INF/lib.
+		step2: in JSP page import it using <%@ taglib ... %>
+			e.g. <%@taglib prefix="c" uri="..." %>
+					<c:redirect url="..."/>		
+		
+		
+		
