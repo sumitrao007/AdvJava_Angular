@@ -1,0 +1,22 @@
+Auto-wiring
+- Automatically injecting appropriate dependency beans into the dependent beans.
+- Autowiring feature of spring framework enables you to inject the object dependency implicitly. It internally uses setter or constructor injection
+-It's Advantage is that, it requires the less code because we don't need to write the code to inject the dependency explicitly.
+-Disadvantage of Autowiring
+  No control of programmer.
+- XML based Auto-wiring:
+		- <bean id="..." class="..." autowire="default|no|byType|byName|constructor" .../>
+		- "default" & "no" --> autowiring is disabled.
+		
+		- "byType" --> dependency bean of property type will be assigned (via setter).
+			-  property name and bean name can be different. It internally calls setter method.
+			- if multiple beans of required type are available, then exception is thrown (for spring version 3.0).(For version 5.0 it copy data to all other beans types are available )
+			- if no bean of required type is available, autowiring is not done.
+		
+		- "byName" --> dependency bean of property name will be assigned (via setter).
+			- property name and bean id name must be same. It internally calls setter method.
+			- if multiple beans of required type are available then property name and bean id name must be same
+			- if no bean of required name is available, autowiring is not done.
+		
+		- "constructor" --> dependency bean of property type will be assigned via single arg constructor (of bean type).
+			

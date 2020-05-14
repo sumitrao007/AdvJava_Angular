@@ -1,0 +1,26 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+  
+  <bean id="pointA" class="com.hefshine.bean.Point">
+  	<property name="x" value="500"/>
+  	<property name="y" value="600"/>
+  </bean>
+  
+   <bean id="pointB" class="com.hefshine.bean.Point">
+  	<property name="x" value="550"/>
+  	<property name="y" value="650"/>
+  </bean>
+  
+  <bean id="triangle" class="com.hefshine.bean.Triangle" autowire="constructor">
+  <constructor-arg name="type" value="Square Type"/>
+  
+  <!-- <property name="type" value="Conical Type"/> -->
+  </bean>
+  
+   </beans>

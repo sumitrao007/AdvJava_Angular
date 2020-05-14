@@ -1,0 +1,24 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+   
+   <bean id="pointA" class="com.hefshine.bean.Point">
+   	<constructor-arg name="x" value="40"/>
+   	<constructor-arg name="y" value="80"/>
+   </bean>
+   
+   <bean id="pointB" class="com.hefshine.bean.Point">
+   	<constructor-arg name="x" value="90"/>
+   	<constructor-arg name="y" value="100"/>
+   </bean>
+   
+   <bean id="triangle" class="com.hefshine.bean.Triangle" autowire="byName">
+   <property name="type" value="Circle type"></property>
+   </bean>
+   
+   </beans>
