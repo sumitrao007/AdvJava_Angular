@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd">
+   
+   <context:annotation-config/>
+
+	<bean id="person" class="com.hefshine.bean.Person">
+	<property name="name" value="Sumit"/>
+	<property name="mobileno" value="7894561236"/>
+	<property name="city" value="pune"/>	
+	</bean>
+	
+	<bean id="emp" class="com.hefshine.bean.Employee">
+	<!-- <property name="emprole" value="Developer"/> -->
+	</bean>
+	
+	<bean id="emp1" class="com.hefshine.bean.Employee1">
+	</bean>
+	
+	
+	<bean id="personA" class="com.hefshine.bean.Person">
+	<property name="name" value="Kiran"/>
+	<property name="mobileno" value="9823654879"/>
+	<property name="city" value="Satara"/>	
+	</bean>
+	
+   
+   </beans>

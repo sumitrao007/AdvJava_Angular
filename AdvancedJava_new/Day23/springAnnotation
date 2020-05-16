@@ -1,0 +1,38 @@
+Annotation- Spring configuration using annotation
+ -Traditionally, Spring allows a developer to manage bean dependencies by using XML-based configuration.
+ - There is an alternative way to define beans and their dependencies. This method  	is a Java-based configuration, also called spring annotation
+ 1 @Autowired Annotation
+	- It is used for automatic injection of beans.
+	- It can apply 
+		- setter level -- setter based DI
+		- constructor level -- constructory based DI
+		- field level/property level -- field based DI 
+	
+	- For @Autowired annotation to work, we also need to enable annotation based configuration in spring bean configuration file. This can be done by context:annotation-config
+	
+	- @Qualifier("...") annotation – 
+		This annotation is used to avoid conflicts in bean mapping and we need to provide the bean name that will be used for autowiring. This way we can avoid issues where multiple beans are defined for same type. This annotation usually works with the @Autowired annotation
+	
+	- @Value("...") 
+		1 You can set value using @value annotation,you can apply on setter method, on properties & on constructor level
+		2 When you use constructor level annotation that time you have to use parametrised constructor i.e. comment parameterless constructor otherwise it will not work
+	
+SteroType Annotation	
+	- @Component annotation 
+		- It represent a spring bean
+		- It indicates class is component class. That class may be or may not be  autowire by another beans 
+		- To use Component annotation to enable <context:component-scan base-package="com.hefshine.beans"> in spring bean configuration file
+		
+	- @Repository -- represent a spring bean handling database (DAO).
+	
+	- @Service -- represent a spring bean containing business logic. Typically it uses daos in it.
+	
+	- @Controller -- represent a spring bean containing navigation logic & web related functionalities. Used in spring web mvc applns.
+	
+@Configuration
+	- annotation helps in Spring annotation based configuration.
+	- @Bean
+		@Configuration annotation indicates that a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions and service requests for those beans at runtime.
+	- @ComponentScan(basePackages = {"com.hefshine.bean"})
+		Mentioned Bean Package Name
+	
