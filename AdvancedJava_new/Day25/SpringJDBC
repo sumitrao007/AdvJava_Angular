@@ -1,0 +1,31 @@
+Spring JDBC
+	- For DAO implementation class, there is a lot of boiler-plate code where we are opening and closing Connection, PreparedStatements and ResultSet. This can lead to resource leak if someone forgets to close the resources properly
+	- We can use org.springframework.jdbc.core.JdbcTemplate class to avoid these errors.
+	- Spring JdbcTemplate is the central class in Spring JDBC core package and provides a lot of methods to execute queries and automatically parse ResultSet to get the Object or list of Objects.
+	- Here we use Rowapper Class to map the Object
+		-RowMapper anonymous class implementation to map the ResultSet data to  bean object in queryForObject() method.
+
+Steps to implement JDBC Teplate
+	1. Create dataSource DI in spring.xml file. We use inbuild dataSource class given by spring to set class="org.springframework.jdbc.datasource.DriverManagerDataSource".In that we can set Property driver name,url,user & password as below
+	
+	<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/studentdb" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+	This dataSource will do the db connection return connection object means it establish connection.	
+	
+	2. Create JdbcTemplate DI in spring.xml file. We use inbuild JdbcTemplate  class given by spring to set 
+	 class= "org.springframework.jdbc.core.JdbcTemplate " 
+	 After that we execute query with help of JdbcTemplate but JdbcTemplate requires connection object, that object we can get from dataSource. To get connection object we have to add ref datasource objectin jdbc template bean.
+	 
+	 <property name="dataSource" ref="dataSource" />
+	 
+	 3. Create DAO Class and add one property 
+	 @Autowired
+	 private JdbcTemplate jdbcTemplate;
+	 Now with the help of jdbcTemplate we can fire a query & execute it.
+	 
+	 4. If you want list of student for that we have to use RowMapper Implementation
+	 
