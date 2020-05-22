@@ -1,0 +1,73 @@
+Why we use Spring MVC?
+	1 Easy to work with Spring
+	2 It is Flexible
+	3 Seperation of Module (i.e. It follows modularity)
+
+Spring MVC
+	- MVC -- Design pattern -- Common in enterprise web apps.
+	- MVC using JSP, Java Beans & Servlet Controller:
+		+ M - Model: -- Java Bean.
+			- POJOs + Data Handling
+			- POJO class (user defined)
+			- Data carrier -- Typically doesn't have BL or DB connectivity.
+		+ V - View: -- Web page (html, jsp, ...) (user defined)
+			- Data Represenation
+		+ C - Controller: -- Servlet.
+			- Navigation, Coupling between Models & Views.
+			- It has two types: Front Controller & Controller(s)
+			1 Front Controller: (spring mvc framework)
+				- org.springframework.web.servlet.DispatcherServlet
+				- create spring application context (WebApplicationContext).
+					
+					- maps the incoming req to corresponding req handling method.
+					- getting req data from incoming req & injecting it into req handling method (as arg) -- as primitive types or model object.
+					- provide validation facilties.
+					- navigating to the next web component (view or another req handler method).
+					- transferring data from req handler method to the view.
+					- making state management/security/localization objects available into req handler.
+			2 Controller(s): (user defined) 
+				- implementation of req handler methods.
+	- WebApplicationContext:
+		- Each spring web appln needs at least one WebApplicationContext.
+		- In simple spring mvc web application, the dispatcher servlet is responsible for creating spring webapplicationcontext. This context is responsible for MVC as well as DI.
+
+Steps to use Spring MVC
+1 Create dynamic project & add jar file in lib folder(spring jars,jstl jar,mysql etc)
+2 Select first time target Runtime i.e. Web Server tomcat
+3 In web.xml Enter  dispatcher servlet bean entry provided by spring
+
+<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+4 Create dispatcher-servlet.xml (i.e. it is our spring.xml just giving different name as per standard)
+5 Add extra schema & location of MVC 
+
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd" 
+		
+6 Add below code for in build viewResolver given by spring 
+<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+7 Add Annotation Tag to use in project so add below tag
+
+<context:component-scan base-package="com.hefshine.*"/>
+	<mvc:annotation-driven/>
+
+8 Create Controller Class to handle a request
+9 create jsp i.e. view files as per our requirements.
+
+
+		
+		
