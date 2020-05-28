@@ -1,0 +1,128 @@
+Hibernate
+- Hibernate is an open source Java persistence framework project
+- It performs powerful object-relational mapping(ORM)and query databases using HQL and SQL.
+- Hibernate is a great tool for ORM mappings in Java
+- ORM tool simplifies the data creation, data manipulation and data access. It is a programming technique that maps the object to the data stored in the database
+- ORM -- Object Relational Mapping
+	- RDBMS Table  --->    Java Object
+	 - Column(s)			- Field(s)
+    - The ORM tool internally uses the JDBC API to interact with the database.
+    - Avoid boilerplate code of database connectivity and column-field mapping.
+	- .Net --> ADO.Net Entity Framework, nHibernate.
+	- Java --> iBatis, Torque, EclipseLink, Hibernate, ... -- by diff vendors.
+	- All modern Java ORMs are JPA (Java Persistence API) compliant.
+	- JPA includes:
+			- basic annotations, xml config syntax(xsd)
+			- apis -- classes/interfaces.
+
++ Hibernate:		
+	- Session:
+		- Encapsulate JDBC connection.
+		- Light-weight -- multiple sessions in an appln.
+		- Not thread synchronized -- not to be used across threads.	
+		- A Session is used to get a physical connection with a database. The Session object is lightweight and designed to be instantiated each time an interaction is needed with the database.
+	- SessionFactory: (org.hibernate.SessionFactory)
+		- Creates session object.
+		- create new session if called first time in given context, next time return the same session object.
+		- Like DriverManager
+		- Heavy-weight -- one session factory per appln (per db).
+		- Thread synchronized/safe.
+		- You would need one SessionFactory object per database using a separate configuration file. So, if you are using multiple databases, then you would have to create multiple SessionFactory objects.
+  
+	- Configuration:
+		- The Configuration object is the first Hibernate object you create in any Hibernate application.
+		- It is usually created only once during application initialization
+		- read hibernate conf from hibernate.cfg.xml
+		- used to build session factory, get db connection 
+	- Transaction:
+		- A Transaction represents a unit of work with the database and most of the RDBMS supports transaction functionality.
+		- By default, in hibernate autocommit is false.
+		- Thus need transaction for each DML operation.
+		- Wraps JDBC transaction or JTA transactions.
+	- Query:
+		- HQL queries (like SQL) targetting to hibernate entities (objects).
+		- HQL support basic CRUD operations and also advanced joins as well as procesdure.
+	- NativeQuery:
+		- SQL queryies -- can be db specific.
+	- Dialect:
+		- The RDBMS even though follow same SQL syntax, differs in few areas like data types, SQL functions, PL-SQL, ...
+		- Also JDBC driver for each RDBMS is different.
+		- So hibernate have dialects for each RDBMS, which is responsible for handling RDBMS differenences, generating SQL queries and talking to JDBC driver.
+		- If dialect for certain RDBMS is not available, then that RDBMS features are not supported by hibernate.
+		1 MySQL
+			org.hibernate.dialect.MySQL5Dialect/org.hibernate.dialect.MySQLDialect
+		2 Oracle (any version)
+			org.hibernate.dialect.OracleDialect
+		3 Oracle 11g
+			org.hibernate.dialect.Oracle10gDialect
+		4 Oracle 10g
+			org.hibernate.dialect.Oracle10gDialect
+
++ ORM mapping using annotations:
+	- @Entity
+		- javax.persistence.Entity annotation is used to mark a class as Entity bean that can be persisted by hibernate, since hibernate provides JPA implementation.
+	- @Table
+		- mapping java class to RDBMS table.
+		- giving annotation & name is optional, if class name is same as table name.
+		- NOTE: Linux/Unix MySQL table names are case sensitive.
+	- @Column
+		- mapping fields of entity class to table columns.
+		- giving annotation & name is optional, if field name is same as column name.
+		* Field-level:
+			- Hibernate directly init field -- when record is fetched from db.for example
+			
+			@Entity
+			@Table(name="ITEMS")
+			class Item implement Serializable {
+				@Id
+				@Column
+				private int id;
+				// ...
+				@Column
+				private double price;
+		* Getter-level -- standard practice:
+		- Hibernate init field using setter method -- when record is fetched from db. for example 	
+			@Entity
+			@Table(name="ITEMS")
+			class Item implement Serializable {
+				private int id;
+				// ...
+				private double price;
+				private double priceIncTax;
+				// ...
+				@Id
+				@Column
+				public int getId() { ... }
+				@Column
+				public double getPrice() { ... }
+	- @Id
+		- represents primary key of entity.
+		- This is compulsory.
+		- DELETE & UPDATE ops will be done wrt primary key.
+	- hibernate.cfg.xml
+		<mapping class="pkg.EntityClassName"/>
+		
+
++ Steps to create hibernate Project
+	1 Create simple core java project.
+	2 Add Hibernate jars in build path
+	3 create xml file in src folder whose name must be hibernate.cgf.xml
+	4 In that xml file mentioned - driver, db url, username, password & dialect
+		- pojo class entries.etc
+	5 create HbUtil -- create session factory
+	6 create entity classes (pojo):
+	  - implements Serializable
+		- @Entity -- on pojo class.
+		- @Table -- on pojo class -- RDBMS table mapping
+		- @Column -- on fields OR getters*
+		- @Id -- on primary key field OR getter*
+	7 What does configuration property does
+		1 It is use all sql query print on console so we set as true
+		<property name="hibernate.show_sql">
+			true
+		</property>
+		2 It is update the table when we perform crud operation
+		 If we used create it will delete all table & create again so always recomonded to use update
+		<property name="hibernate.hbm2ddl.auto">
+			update
+		</property>
