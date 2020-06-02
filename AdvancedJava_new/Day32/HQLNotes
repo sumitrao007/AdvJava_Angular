@@ -1,0 +1,36 @@
+Hibernate Query Language (HQL)
+	- Hibernate Query Language (HQL) is same as SQL (Structured Query Language) but it doesn't depends on the table of the database.
+	- Instead of table name, we use class name in HQL.
+	- HQL is a superset of the JPQL(Java Persistence Query Language)
+	- HQL is a language with its own syntax and grammar. It is written as strings, like “from Product p“.
+	- HQL queries are translated by Hibernate into conventional SQL queries.
+
+HQL Syntax
+	1 HQL Insert
+		- HQL supports only the INSERT INTO……… SELECT……… ;
+		- I mean while writing the insert query, we need to select values from other table, we can’t insert our own values manually
+	2 HQL Update
+		- Query qry = session.createQuery("update Product p set  
+			p.description=:desc where p.id=1");
+			qry.setParameter("desc", "Good Product!!!!");		 
+			int res=qry.executeUpdate();
+		- while we are working with DML operations in HQL we have to call executeUpdate();
+	3 HQL Delete
+		-  Query qry = session.createQuery("delete Product p where p.id=:myid");
+		 qry.setParameter("myid", 2);
+		 
+		 int res=qry.executeUpdate();
+		 System.out.println("record deleted... "+res);
+	4 HQL SELECT
+		- Query query=session.createQuery("from Product p");
+		
+		List<Product> list=query.list();
+	5 HQL Get PArticular Record
+		-  Query query=session.createQuery("from Product where id=:myid");
+			query.setInteger("myid", 4);
+			Product p1=(Product)query.uniqueResult();
+	6 HQL Pagination Result
+		-  Query query=session.createQuery("from Product");  
+			query.setFirstResult(0);  
+			query.setMaxResults(5);  
+			List<Product> list=query.list();//will return the records from 1 to 5th number
